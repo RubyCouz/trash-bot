@@ -43,7 +43,10 @@ bot.on('message', function (message) {
         'https://tenor.com/view/bescherelle-orthographe-gif-15543456',
         'https://tenor.com/view/bescherelle-militaire-bescherelle-power-throw-army-gif-17625121'
     ]
-    let url = 'http://127.0.0.1:8000/readFile.php'
+    // url dev
+    // let url = 'http://127.0.0.1:8000/readFile.php'
+    // url prod
+    let url = 'https://dicoapi.herokuapp.com/readFile/php'
     ajax(url, message.content)
         .then(function (result) {
         console.log(result)
