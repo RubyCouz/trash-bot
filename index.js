@@ -46,7 +46,7 @@ bot.on('message', function (message) {
     // url dev
     // let url = 'http://127.0.0.1:8000/readFile.php'
     // url prod
-    let url = 'https://dicoapi.herokuapp.com/readFile/php'
+    let url = 'https://dicoapi.herokuapp.com/readFile.php'
     ajax(url, message.content)
         .then(function (result) {
         console.log(result)
