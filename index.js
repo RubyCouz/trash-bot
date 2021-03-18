@@ -39,7 +39,6 @@ bot.on('message', function (message) {
     DelRiku.parse(message)
 })
 // login du bot, à décommenter avant mise en prod
-// bot.login(process.env.token)
+bot.login(process.env.token)
 
 // key dev, à supprimer avant mise en prod
-bot.login('ODE4ODE4NjA5Nzc3ODY4ODQw.YEdmQQ.JJzJfqRAN2fSZoEvJGyP2Fxcs3I')
