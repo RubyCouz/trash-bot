@@ -25,7 +25,7 @@ bot.on('ready', function () {
 
 // analyse des messages
 bot.on('message', function (message) {
-
+console.log(message)
     Noob.parse(message)
     Mom.parse(message)
     Raid.parse(message)

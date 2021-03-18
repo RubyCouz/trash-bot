@@ -9,7 +9,7 @@ module.exports = class Zatox extends Filter {
     }
     static action(message) {
         const rageMess = [
-            'Attend, j\'appelle @Zatox#1891...',
+            'Attend, j\'appelle Zatox...',
             '@Zatox#1891, on te pique ta technique',
             'Ouais, va pas casser ta manette !!!',
             'https://tenor.com/view/mohamed-henni-bloger-fan-de-om-fan-de-marseille-youtuber-gif-12597020',

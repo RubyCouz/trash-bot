@@ -3,12 +3,10 @@ const User = require('./user')
 module.exports = class detectUser extends User {
 
     static match(message) {
-        console.log(message.author.username)
         return message.author.username
     }
 
     static action(message) {
-        console.log(message.author.username)
         // détection d'utilisateur
 
         const charlemagneReply = [
