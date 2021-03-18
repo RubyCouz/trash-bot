@@ -4,6 +4,14 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 // instanciation XMLHTTPRequest => ajax
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+const Noob = require('./filters/noob')
+const Mom = require('./filters/mom')
+const Raid = require('./filters/raid')
+const Cheh = require('./filters/cheh')
+const Chocolate = require('./filters/painAuChocolat')
+const Ehpad = require('./filters/ehpad')
+const Zatox = require('./filters/zatox')
 // définition de l'activité du bot
 bot.on('ready', function () {
     bot.user.setActivity('Trash Talk').catch(console.error)
@@ -16,9 +24,6 @@ let date = new Date()
 let hour = date.getHours()
 let min = date.getMinutes()
 
-function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
 
 function ajax(url, message) {
     return new Promise(function (resolve, reject) {
@@ -36,6 +41,14 @@ function ajax(url, message) {
 
 // analyse des messages
 bot.on('message', function (message) {
+
+    Noob.parse(message)
+    Mom.parse(message)
+    Raid.parse(message)
+    Cheh.parse(message)
+    Chocolate.parse(message)
+    Ehpad.parse(message)
+    Zatox.parse(message)
     const correctReply = [
         'https://tenor.com/view/eyes-burning-my-eyes-spongebob-gif-5183364',
         'https://tenor.com/view/bescherelle-pulp-fiction-gif-11854215',
@@ -49,31 +62,17 @@ bot.on('message', function (message) {
     let url = 'https://dicoapi.herokuapp.com/readFile.php'
     ajax(url, message.content)
         .then(function (result) {
-        console.log(result)
-            if(result !== '0') {
-                if(!message.author.bot) {
+            if (result !== '0') {
+                if (!message.author.bot) {
                     let randomInt = randomNumber(0, 4)
                     message.reply(correctReply[randomInt])
                 }
             }
-    })
-        .catch(function() {
+        })
+        .catch(function () {
             console.log('erreur')
         })
 
-
-
-    // xhr.onreadystatechange = function () {
-    //     if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 0)) {
-    //         console.log(xhr.response)
-    //         if (xhr.response != 0) {
-    //             if (!message.author.bot) {
-    //                 message.reply('faux')
-    //             }
-    //         }
-    //         // alert(xhr.responseText); // Données textuelles récupérées
-    //     }
-    // }
 
 // détection de mention d'utilisateur
     message.mentions.users.forEach(
@@ -112,87 +111,7 @@ bot.on('message', function (message) {
         message.reply(charlemagneReply[randomInt])
         message.react('🖕')
     }
-    // recherche de différents mots dans le message
-    let mom = message.content.search(/mère|daronne|maman|ntm/i)
-    let raid = message.content.search(/raid|tryhard|try hard/i)
-    let cheh = message.content.search(/cheh|fail|échec|raté/i)
-    let painAuChocolat = message.content.search(/chocolatine/i)
-    let noob = message.content.search(/noob/i)
-    let ehpad = message.content.search(/ehpad/i)
-    let rage = message.content.search(/alt\+f4|rage|ragequit|altf4|zatox|sel/i)
 
-    if (mom !== -1) {
-        if (!message.author.bot) {
-            message.reply('Ah noooon... On a dit : "pas les mamans !!!')
-        }
-    }
-    // si le mot 'raid' est dans le message
-    if (raid !== -1) {
-        if (!message.author.bot) {
-            message.channel.send('https://tenor.com/view/raid-destiny-seagull-gif-19244751')
-        }
-    }
-    // si "cheh" est dans le messsage
-    if (cheh !== -1) {
-        const chehReply = [
-            'cheh',
-            'CHEH !!!',
-            'Un gros CHEH dans ta gueule !!!',
-            'https://tenor.com/view/nelson-monfort-i-hear-che-in-my-oreillette-smile-happy-gif-16762248',
-            'https://tenor.com/view/cheh-bienfaits-duh-gif-12323680',
-            'https://tenor.com/view/cheh-bien-fait-deserve-deserves-what-she-deserves-gif-11935657'
-        ]
-        if (!message.author.bot) {
-            let randomInt = randomNumber(0, 5)
-            message.channel.send(chehReply[randomInt])
-        }
-    }
-    // si "noob" est dans le message
-    if (noob !== -1) {
-        const noobMess = [
-            'Noob',
-            'Sale noob', 'Noooooooooooooooooooooooooooooooob !!!',
-            'C\'toi le noob...',
-            'Gros noob',
-            'Noobie',
-            'Mojitac',
-            'Noobnoobnoobnoobnoobnoob'
-        ]
-        // détectionsi c'est le bot qui publie le message
-        if (!message.author.bot) {
-            let randomInt = randomNumber(0, 7)
-            message.channel.send(noobMess[randomInt])
-        }
-    }
-// si le mot "chocolatine" est dans le message
-    if (painAuChocolat !== -1) {
-        const chocolatineMess = [
-            'On dit "pain au chocolat", connard !!!',
-            'Nope, essaie encore : PAIN AU CHOCOLAT',
-            'Encore un effort : PAIN AU CHOCOLAT', 'Inculte...'
-        ]
-        let randomInt = randomNumber(0, 3)
-        message.reply(chocolatineMess[randomInt])
-    }
-
-    if (ehpad !== -1) {
-        message.reply('Couz t\'emmerde, branleur :middle_finger: !!!')
-        message.react('🖕')
-    }
-
-    if (rage !== -1) {
-        const rageMess = [
-            'Attend, j\'appelle @Zatox#1891...',
-            '@Zatox#1891, on te pique ta technique',
-            'Ouais, va pas casser ta manette !!!',
-            'https://tenor.com/view/mohamed-henni-bloger-fan-de-om-fan-de-marseille-youtuber-gif-12597020',
-            'https://tenor.com/view/mohamed-henni-nul-gif-13266143'
-        ]
-        if (!message.author.bot) {
-            let randomInt = randomNumber(0, 4)
-            message.channel.send(rageMess[randomInt])
-        }
-    }
 
 
 })
@@ -200,5 +119,4 @@ bot.on('message', function (message) {
 bot.login(process.env.token)
 
 // key dev, à supprimer avant mise en prod
-
 
