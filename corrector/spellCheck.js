@@ -15,9 +15,9 @@ module.exports = class SpellCheck extends Corrector {
             'https://tenor.com/view/bescherelle-militaire-bescherelle-power-throw-army-gif-17625121'
         ]
         // url dev
-        let url = 'http://127.0.0.1:8000/readFile.php'
+        // let url = 'http://127.0.0.1:8000/readFile.php'
         // url prod
-        // let url = 'https://dicoapi.herokuapp.com/readFile.php'
+        let url = 'https://dicoapi.herokuapp.com/readFile.php'
         Corrector.ajax(url, message.content)
             .then(function (result) {
                 // console.log(result)
